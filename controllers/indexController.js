@@ -4,7 +4,7 @@ require('dotenv').config()
 
 const indexPageController = async (req, res) => {
     const posts = await getAllPosts();
-    console.log(posts);
+  //  console.log(posts);
     res.render("index", { user: req.user, posts: posts });
 }
 
@@ -15,7 +15,8 @@ const getAddPost = (req, res) => {
 
 const postAddPost = async (req, res) => {
     const { title, content } = req.body;
-    await pool.query("INSERT INTO posts (title, content) VALUES ($1, $2)", [title, content]);
+    const author_id = req.user.id;
+    await pool.query("INSERT INTO posts (title, content, author_id) VALUES ($1, $2, $3)", [title, content, author_id]);
     res.redirect("/");
 }   
 

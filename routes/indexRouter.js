@@ -8,12 +8,13 @@ const { isAuth, isAdmin } = require("../controllers/authController");
 indexRouter.get("/", indexPageController)
 
 indexRouter.get('/addpost',isAuth, getAddPost);
-indexRouter.post('/addpost',isAuth, postAddPost);
-  
-
-indexRouter.post('/delpost/:id',isAdmin, deletePost)
 
 indexRouter.get('/member',isAuth, getMember)
+
+// post routes
+indexRouter.post('/addpost',isAuth, postAddPost);
+
+indexRouter.post('/delpost/:id',isAdmin, deletePost)
 
 indexRouter.post('/member',isAuth, postMember)
 

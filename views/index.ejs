@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Log In</title>
+  <title>Home</title>
 </head>
 <body>
   <h1>Members Only !</h1>
@@ -15,8 +15,11 @@
     <h2>Role : <%= user.role%></h2>
     <div style="display: flex; gap: 50px;">
       <a href="/addpost">Add new Post</a>
-      <a href="/member">Become a Member</a>  
-      <a href="/auth/log-out">LOG OUT</a> <br><br>
+      <% if (!(user.role === 'admin' || user.role === 'member')) {%>
+        <a href="/member">Become a Member</a>  
+      <% } %>
+      <a href="/auth/log-out">LOG OUT</a> 
+
   
     </div>
 

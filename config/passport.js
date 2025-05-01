@@ -5,7 +5,6 @@ const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require("bcryptjs");
 const sessionStore = require("./sessionStore");
 require("dotenv").config();
-console.log(process.env.SESSION_SECRET)
 
 const sessionInit = session({ 
 	secret: process.env.SESSION_SECRET, 
@@ -25,7 +24,7 @@ passport.use(
       try {
         const { rows } = await pool.query("SELECT * FROM users WHERE username = $1", [username]);
         const user = rows[0];
-        console.log(user);
+       // console.log(user);
   
         if (!user) {
           return done(null, false, { message: "Incorrect username" });
@@ -35,12 +34,12 @@ passport.use(
         //console.log(password, user.password);
 
         const match = await bcrypt.compare(password, user.password);
-        console.log(match);
+       // console.log(match);
         if (!match) {
           // passwords do not match!
           return done(null, false, { message: "Incorrect password" })
         }
-        console.log("pass match")
+       // console.log("pass match")
         return done(null, user);
       } catch(err) {
         return done(err);
