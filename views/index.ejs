@@ -5,24 +5,29 @@
   <title>Log In</title>
 </head>
 <body>
-  <h1>WELCOME TO THE APP</h1>
+  <h1>Members Only !</h1>
 
 
 <%  if(user) { %>
   <div>
 
-    <h1>WELCOME BACK <%= user.username %></h1>
+    <h1>Welcome back <%= user.username %></h1>
     <h2>Role : <%= user.role%></h2>
-    <a href="/log-out">LOG OUT</a> <br><br>
+    <div style="display: flex; gap: 50px;">
+      <a href="/addpost">Add new Post</a>
+      <a href="/member">Become a Member</a>  
+      <a href="/auth/log-out">LOG OUT</a> <br><br>
+  
+    </div>
 
-    <%-include('posts', { posts: posts }) %>
+    <%-include('posts', { posts: posts , role: user.role }) %>
   </div>
  
 <% } else { %>
   <h2>Role : Guest</h2>
-<a href="log-in">login</a>
-<br><br>
-<a href="sign-up">sign-up</a>
+   <a href="auth/log-in">login</a>
+   <br><br>
+<a href="auth/sign-up">sign-up</a>
 <% } %>
  
 </body>

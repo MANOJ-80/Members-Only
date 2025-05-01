@@ -8,6 +8,7 @@ const bcrypt = require("bcryptjs");
 const { sessionInit } = require("./config/passport");
 const pool = require("./config/pool");
 const indexRouter = require("./routes/indexRouter");
+const authuRouter = require("./routes/authRouter");
 console.log("DB_URL", process.env.DB_URL);
 
 
@@ -34,6 +35,12 @@ app.use((req, res, next) => {
 })
 
 app.use('/', indexRouter);
+app.use('/auth', authuRouter);
+
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send("Something broke!");
+});
 
   
   

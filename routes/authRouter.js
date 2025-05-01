@@ -1,31 +1,22 @@
 const authuRouter = require("express").Router();
-const passport = require("passport");
-const pool = require("../config/pool");
-const bcrypt = require("bcryptjs");
+const { getSignUp, getLogin, getLogout, postLogin, postSignUp } = require("../controllers/authController");
 
 
-const  isAuth = (req, res, next) => {
-    if(req.isAuthenticated()){
-        next()
-    }
 
-    else {
-        res.status(401).json({ msg: "You are not authorized"})
-    }
-}
+authuRouter.get('/sign-up', getSignUp);
+authuRouter.get("/log-in", getLogin)
+
+authuRouter.get("/log-out", getLogout)
 
 
-const isAdmin = (req, res, next) => {
-    if(req.isAuthenticated() && req.user.role === "admin"){
-        next()
-    }
+// post routes
+authuRouter.post("/sign-up", postSignUp)
+ 
+authuRouter.post("/log-in", postLogin);
 
-    else {
-        res.status(401).json({ msg: "You are not authorized"})
-    }
-}
 
-module.exports = {
-    isAuth,
-    isAdmin
-}
+
+
+
+module.exports = authuRouter;
+ 
