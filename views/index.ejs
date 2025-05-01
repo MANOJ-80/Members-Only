@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Log In</title>
+</head>
+<body>
+  <h1>WELCOME TO THE APP</h1>
+
+
+<%  if(user) { %>
+  <div>
+
+    <h1>WELCOME BACK <%= user.username %></h1>
+    <h2>Role : <%= user.role%></h2>
+    <a href="/log-out">LOG OUT</a> <br><br>
+
+    <%-include('posts', { posts: posts }) %>
+  </div>
+ 
+<% } else { %>
+  <h2>Role : Guest</h2>
+<a href="log-in">login</a>
+<br><br>
+<a href="sign-up">sign-up</a>
+<% } %>
+ 
+</body>
+</html>
